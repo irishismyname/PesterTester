@@ -1,8 +1,6 @@
-$CurrentPath = (Resolve-Path .).Path
-
 docker run -it `
   --user ContainerAdministrator `
-  -v "${CurrentPath}:C:\source" `
+  -v "${pwd}:C:\source" `
   mcr.microsoft.com/powershell:nanoserver-20h2 `
   pwsh -Command "
   Install-Module Pester -Force -Scope AllUsers -SkipPublisherCheck; `
@@ -10,5 +8,6 @@ docker run -it `
   Set-Location ./source;
   Invoke-Pester;
   Write-Warning '-------- Running with the -OutputFile set will fail --------';
-  Invoke-Pester -OutputFile testResults.xml;
+  `$Result = Invoke-Pester -OutputFile testResults.xml;
+  $Result;
   "
