@@ -9,6 +9,6 @@ docker run -it `
   Import-Module Pester -PassThru; `
   Set-Location ./source;
   Invoke-Pester;
-  Write-Warning '-------- Running with the -CI flag will fail --------';
-  Invoke-Pester -CI;
+  Write-Warning '-------- Running with the -OutputFile set will fail --------';
+  Invoke-Pester -OutputFile testResults.xml;
   "
